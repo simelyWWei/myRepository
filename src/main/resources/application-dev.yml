@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /myspring
+  port: 8086
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  type-aliases-package: com.myexample.demo.domain
+  base-mapper-package: com.myexample.demo.mapper
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+
+

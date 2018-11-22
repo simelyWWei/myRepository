@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myexample.demo.mapper.PersonMapper">
+
+    <resultMap type="com.myexample.demo.domain.Person" id="traceinfoMap">
+        <id  column="id" property="id"></id>
+        <result  column="USERNAME" property="username" />
+        <result  column="IDNUM" property="idnum" />
+        <result  column="DEPTNUM" property="deptnum" />
+        <result  column="logging_time" property="logging_time" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+			 	T.id,
+			 	T.USERNAME,
+			 	T.IDNUM,
+			 	T.DEPTNUM,
+			 	T.logging_time
+	</sql>
+
+    <!-- 根据输入条件查询列表数据或详情数据 -->
+    <select id="getpersontest" resultMap="traceinfoMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_person T where 1=1
+    </select>
+
+    <insert id="addPerson" parameterType="com.myexample.demo.domain.Person">
+      insert into sys_person
+      (id,USERNAME,IDNUM,DEPTNUM,logging_time)
+      values
+      (#{id},#{username},#{idnum},#{deptnum},#{logging_time})
+    </insert>
+
+</mapper>
