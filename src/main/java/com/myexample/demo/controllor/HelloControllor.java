@@ -37,7 +37,7 @@ public class HelloControllor {
     }
 
     @ApiIgnore
-    @ApiOperation(value = "hello2测试",notes = "返回hello")
+    @ApiOperation(value = "hello2测试yepsnpan12e3we",notes = "返回hello")
     @RequestMapping(value = "/hello12",method = RequestMethod.GET)
     public String test12(){
         return "hello!";
