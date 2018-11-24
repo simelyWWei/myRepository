@@ -3,3 +3,5 @@
 springboot 
 mybatis
 swagger
+
+Creating a new branch is quick.
