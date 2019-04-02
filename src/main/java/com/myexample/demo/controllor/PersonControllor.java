@@ -1,7 +1,7 @@
 package com.myexample.demo.controllor;
 
 import com.myexample.demo.domain.Person;
-import com.myexample.demo.service.personService;
+import com.myexample.demo.service.PersonService;
 import com.myexample.demo.util.DateTime;
 import com.myexample.demo.util.Uuid8Util;
 import io.swagger.annotations.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = "/person")
 public class PersonControllor {
     @Autowired
-    private personService syspersonservice;
+    private PersonService syspersonservice;
 
     @ApiOperation(value = "获取人员列表",notes = "获得全部的人员列表")
     @RequestMapping(value = "/get",method = RequestMethod.GET)

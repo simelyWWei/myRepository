@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myexample.demo.mapper.GoodsMapper">
+
+    <resultMap type="com.myexample.demo.domain.Goods" id="traceinfoMap">
+        <id  column="id" property="id"></id>
+        <result  column="product_name" property="productName" />
+        <result  column="product_price" property="productPrice" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+			 	T.id,
+			 	T.product_name,
+			 	T.product_price
+	</sql>
+
+    <!-- 根据输入条件查询列表数据或详情数据 -->
+    <select id="getGoodsById" resultMap="traceinfoMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from goods T where T.id=#{goodsId}
+    </select>
+
+    <select id="getGoodsList" resultMap="traceinfoMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from goods T where 1=1
+    </select>
+
+    <insert id="addGoods" parameterType="com.myexample.demo.domain.Goods">
+      insert into goods
+      (id,product_name,product_price)
+      values
+      (#{id},#{productName},#{productPrice})
+    </insert>
+
+</mapper>

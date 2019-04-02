@@ -4,13 +4,21 @@ server:
   port: 8086
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=UTC
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
 mybatis:
   type-aliases-package: com.myexample.demo.domain
-  base-mapper-package: com.myexample.demo.mapper
   mapper-locations: classpath*:mybatis/mapper/*.xml
+  type-handlers-package: com.myexample.demo.config.handler
+  base-packages: com.myexample.demo.mapper
+#  configuration:
+#    map-underscore-to-camel-case: true     #对下划线的处理
 
 

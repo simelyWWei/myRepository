@@ -1,8 +1,7 @@
 package com.myexample.demo.controllor;
 
-import com.myexample.demo.domain.Person;
 import com.myexample.demo.mapper.PersonMapper;
-import com.myexample.demo.service.personService;
+import com.myexample.demo.service.PersonService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ import java.util.List;
 public class HelloControllor {
 
     @Autowired
-    private personService syspersonservice;
+    private PersonService syspersonservice;
 
     @Autowired
     private PersonMapper syspersonmapper;

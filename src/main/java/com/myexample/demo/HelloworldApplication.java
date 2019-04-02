@@ -6,7 +6,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 public class HelloworldApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(HelloworldApplication.class, args);
     }

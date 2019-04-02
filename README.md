@@ -3,6 +3,7 @@
 springboot 
 mybatis
 swagger
-test3
+加入joda-money对金币进行计算
+使用HikariPC数据源
 
-Creating a new branch is quick.
+mybatis、datasource使用springboot2.0自动加载
