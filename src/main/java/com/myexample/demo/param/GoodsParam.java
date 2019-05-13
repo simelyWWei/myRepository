@@ -1,4 +1,4 @@
-package com.myexample.demo.domain;
+package com.myexample.demo.param;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -10,12 +10,11 @@ import org.joda.money.Money;
 import java.io.Serializable;
 
 @Data
-public class Goods implements Serializable {
-
-    private String id;
+public class GoodsParam implements Serializable {
 
     private String productName;
 
+    @JsonDeserialize(using = MoneyJsonDeserializer.class)
     @JsonSerialize(using = MoneyJsonSerializer.class)
     private Money productPrice;
 }

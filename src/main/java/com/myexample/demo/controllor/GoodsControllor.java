@@ -1,7 +1,10 @@
 package com.myexample.demo.controllor;
 
 import com.myexample.demo.domain.Goods;
+import com.myexample.demo.param.GoodsAddParam;
+import com.myexample.demo.param.GoodsParam;
 import com.myexample.demo.service.GoodsService;
+import com.myexample.demo.util.RootResult;
 import com.myexample.demo.util.Uuid8Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,10 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
@@ -35,7 +35,7 @@ public class GoodsControllor {
         Goods goods = new Goods();
         goods.setId(Uuid8Util.get32UUID());
         goods.setProductName("测试");
-        goods.setProductPrice(Money.of(CurrencyUnit.of("CNY"), 30.12));
+        goods.setProductPrice(Money.of(CurrencyUnit.of("CNY"), 1.5));
         int count = 0;
         try {
             count = goodsService.addGoods(goods);
@@ -47,12 +47,35 @@ public class GoodsControllor {
         return count;
     }
 
+    @ApiOperation(value = "添加商品json", notes = "添加商品json")
+    @RequestMapping(value = "/saveGoods", method = RequestMethod.POST)
+    public RootResult<String> saveGoods(@RequestBody GoodsAddParam addParam) {
+        RootResult<String> rootResult = new RootResult<>();
+        Goods goods = new Goods();
+        String id = "";
+        try {
+            id = Uuid8Util.get32UUID();
+            goods.setId(id);
+            goods.setProductName(addParam.getProductName());
+            goods.setProductPrice(addParam.getProductPrice());
+//            goods.setProductPrice(Money.of(CurrencyUnit.of("CNY"),Double.parseDouble(addParam.getProductPrice())));
+            goodsService.addGoods(goods);
+        } catch (Exception e) {
+            e.printStackTrace();
+            id = "0-0";
+        }
+        rootResult.setData(id);
+        return rootResult;
+    }
+
     @ApiOperation(value = "查询商品", notes = "根据id查询商品")
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
-    public Goods getGoodsById(
+    public RootResult<Goods> getGoodsById(
             @ApiParam(value = "商品id", name = "goodsId", required = true)
             @RequestParam(name = "goodsId", required = true) String goodsId) {
-        return goodsService.getGoodsById(goodsId);
+        RootResult<Goods> rootResult = new RootResult<>();
+        rootResult.setData(goodsService.getGoodsById(goodsId));
+        return rootResult;
     }
 
     @ApiOperation(value = "查询商品", notes = "根据id查询商品")
