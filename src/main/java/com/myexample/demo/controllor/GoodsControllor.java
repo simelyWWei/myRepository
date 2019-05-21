@@ -78,6 +78,16 @@ public class GoodsControllor {
         return rootResult;
     }
 
+    @ApiOperation(value = "查询商品", notes = "根据商品名称查询商品")
+    @RequestMapping(value = "/getByName", method = RequestMethod.GET)
+    public RootResult<Goods> getGoodsByName(
+            @ApiParam(value = "商品名称", name = "goodsName", required = true)
+            @RequestParam(name = "goodsName") String goodsName) {
+        RootResult<Goods> rootResult = new RootResult<>();
+        rootResult.setData(goodsService.findGoodsFromRedis(goodsName));
+        return rootResult;
+    }
+
     @ApiOperation(value = "查询商品", notes = "根据id查询商品")
     @RequestMapping(value = "/testTotoPrice", method = RequestMethod.GET)
     public Goods testTotoPrice() {
