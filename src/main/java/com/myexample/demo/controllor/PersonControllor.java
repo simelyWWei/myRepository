@@ -2,9 +2,9 @@ package com.myexample.demo.controllor;
 
 import com.myexample.demo.domain.Person;
 import com.myexample.demo.service.PersonService;
-import com.myexample.demo.util.DateTime;
 import com.myexample.demo.util.Uuid8Util;
 import io.swagger.annotations.*;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +67,7 @@ public class PersonControllor {
     ){
         String id = Uuid8Util.get32UUID();
         sysPerson.setId(id);
-        sysPerson.setLogging_time(DateTime.currentTime());
+        sysPerson.setLogging_time(DateTime.now().toDate());
         int count = 0;
         try {
             count = syspersonservice.addPerson(sysPerson);

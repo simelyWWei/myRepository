@@ -32,7 +32,6 @@ public class GoodsService {
         List<Goods> goodsList = getGoodsList();
         goodsList.stream().forEach(e -> {
             hashOperations.put(CACHE,e.getProductName(),e);
-            //一定要设置超时时间
             redisTemplate.expire(CACHE, 3, TimeUnit.MINUTES);
         });
     }
