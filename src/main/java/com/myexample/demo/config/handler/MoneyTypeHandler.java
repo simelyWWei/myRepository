@@ -30,7 +30,7 @@ public class MoneyTypeHandler extends BaseTypeHandler<Money> {
 
     @Override
     public Money getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        System.out.println("getNullableResult======"+rs.toString()+"--"+columnName);
+//        System.out.println("getNullableResult======"+rs.toString()+"--"+columnName);
         return parseMoney(rs.getLong(columnName));
     }
 
@@ -45,7 +45,7 @@ public class MoneyTypeHandler extends BaseTypeHandler<Money> {
     }
 
     private Money parseMoney(Long value) {
-        System.out.println("value===="+value);
+//        System.out.println("value===="+value);
         return Money.of(CurrencyUnit.of("CNY"), value / 100.0);
     }
 }

@@ -4,7 +4,7 @@ server:
   port: 8086
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=UTC
+    url: jdbc:p6spy:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=UTC
     username: root
     password: 123456
     hikari:
@@ -13,6 +13,7 @@ spring:
       idle-timeout: 600000
       connection-timeout: 30000
       max-lifetime: 1800000
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
   redis:
     host: 192.168.57.11
     lettuce:
@@ -26,5 +27,7 @@ mybatis:
   base-packages: com.myexample.demo.mapper
 #  configuration:
 #    map-underscore-to-camel-case: true     #对下划线的处理
+
+redis-use: false
 
 

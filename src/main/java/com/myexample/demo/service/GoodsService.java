@@ -4,6 +4,7 @@ import com.myexample.demo.domain.Goods;
 import com.myexample.demo.mapper.GoodsMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -26,14 +27,19 @@ public class GoodsService {
     @Resource
     private RedisTemplate<String,Goods> redisTemplate;
 
+    @Value("${redis-use}")
+    private boolean useRedis;
+
     @PostConstruct
     void init(){
-        hashOperations = redisTemplate.opsForHash();
         List<Goods> goodsList = getGoodsList();
-        goodsList.stream().forEach(e -> {
-            hashOperations.put(CACHE,e.getProductName(),e);
-            redisTemplate.expire(CACHE, 3, TimeUnit.MINUTES);
-        });
+        if(useRedis) {
+            hashOperations = redisTemplate.opsForHash();
+            goodsList.stream().forEach(e -> {
+                hashOperations.put(CACHE, e.getProductName(), e);
+                redisTemplate.expire(CACHE, 3, TimeUnit.MINUTES);
+            });
+        }
     }
 
     public int addGoods(Goods goods) {

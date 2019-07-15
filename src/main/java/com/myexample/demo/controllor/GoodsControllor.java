@@ -78,6 +78,14 @@ public class GoodsControllor {
         return rootResult;
     }
 
+    @ApiOperation(value = "查询商品列表", notes = "查询全部商品")
+    @RequestMapping(value = "/getGoods", method = RequestMethod.GET)
+    public RootResult<List<Goods>> getGoods() {
+        RootResult<List<Goods>> rootResult = new RootResult<>();
+        rootResult.setData(goodsService.getGoodsList());
+        return rootResult;
+    }
+
     @ApiOperation(value = "查询商品", notes = "根据商品名称查询商品")
     @RequestMapping(value = "/getByName", method = RequestMethod.GET)
     public RootResult<Goods> getGoodsByName(
