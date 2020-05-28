@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .title("MySpringbootDemo")
                 // 创建人
                 .contact(new Contact("WEIWEI", "https://www.mydemo-weiwei.cn/",
-                        "weiw26@chinaunicom.cn"))
+                        "bjtuwweiei@163.com"))
                 // 版本号
                 .version("1.0")
                 // 描述
